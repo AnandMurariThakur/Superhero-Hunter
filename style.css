@@ -1,0 +1,47 @@
+.bottom-right-button {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  background-color: lightblue;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.result-section {
+  overflow: scroll;
+  height: 90vh;
+  padding-top: 20px;
+}
+
+.result-section::-webkit-scrollbar {
+  display: none;
+}
+.about-sec {
+  overflow: scroll;
+  height: 80vh;
+  padding-top: 20px;
+}
+.about-sec::-webkit-scrollbar {
+  display: none;
+}
+.bottom-left-button {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  background-color: lightblue;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.back-button {
+  color: black;
+  text-decoration: none;
+}
+#link {
+  display: flex;
+  width: 200px;
+  justify-content: space-between;
+}
