@@ -24,47 +24,62 @@
     <nav class="navbar sticky-top" style="background-color: lightblue">
       <div class="container-fluid">
         <a class="navbar-brand">SuperHero Hunter</a>
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search Your Superhero..."
+            aria-label="Search"
+            id="search-string"
+          />
+          <button
+            class="btn btn-outline-success"
+            id="search-form"
+            type="submit"
+          >
+            Search
+          </button>
+        </form>
       </div>
     </nav>
-    <section class="about-sec">
-      <div class="text-center p-5">
-        <h1>About Superheros!</h1>
-      </div>
-      <!-- details of the superhero -->
-      <div class="container pb-5 mx-auto align-self-center">
-        <div id="info">
-          <img
-            src=""
-            style="width: 15rem; height: 15rem"
-            id="img"
-            alt="image not loaded"
-          />
-          <div id="name">Name</div>
-          <div id="id">ID</div>
-          <div id="desc">Description</div>
-          <div id="comic">Comics</div>
-          <div id="series">series</div>
-          <div id="stories">stories</div>
-          <div id="count">count</div>
-          <div id="modified">modified</div>
-          <div id="status">status</div>
-          <div id="total">total</div>
-          <div id="limit">limit</div>
-          <div id="offset">offset</div>
-          <div id="code">code</div>
-          <div id="link">
-            <a href="" target="_blank" id="details">Details</a
-            ><a href="" target="_blank" id="wiki">Wiki</a>
-            <a href="" target="_blank" id="comiclink">Comiclink</a>
-          </div>
+    <h1 id="no-data"></h1>
+    <section class="result-section">
+      <div class="container-fluid mx-auto align-self-center">
+        <div class="mx-auto justify-content-evenly row" id="superhero-list">
+          <template id="canvas">
+            <div class="col-3 shadow-lg p-4 mb-4 m-1 bg-body rounded">
+              <!-- Basic Information of Superheros -->
+              <div id="info">
+                <img
+                  src=""
+                  style="width: 12rem; height: 10rem; margin-left: 40px"
+                  id="img"
+                  alt="image not loaded"
+                />
+                <div id="name">Name -</div>
+                <div id="id">ID</div>
+                <div id="comic">Comics</div>
+                <div id="series">series</div>
+                <div id="stories">stories</div>
+                <div id="events">events</div>
+              </div>
+              <div id="buttons" class="d-flex justify-content-between mt-3">
+                <!-- Add to Favourite button -->
+                <button class="btn btn-outline-primary btn-sm" id="fav">
+                  Remove from Favourite
+                </button>
+                <!-- Learn More button -->
+                <button class="btn btn-primary btn-sm" id="learn-more">
+                  About Me
+                </button>
+              </div>
+            </div>
+          </template>
         </div>
       </div>
     </section>
     <button class="bottom-left-button">
       <a class="back-button" href="./index.html">Back</a>
-    </button>
-    <button class="bottom-right-button" onclick="addToFavorite()">
-      Add to favorite superheroes
     </button>
     <!-- Added link for all bootstrap link for JS -->
     <script
@@ -83,6 +98,6 @@
       crossorigin="anonymous"
     ></script>
     <!-- Linking JavaScript File  -->
-    <script src="aboutSuperHero.js"></script>
+    <script src="favoriteHero.js"></script>
   </body>
 </html>

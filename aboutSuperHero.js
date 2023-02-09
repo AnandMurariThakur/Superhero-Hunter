@@ -1,12 +1,14 @@
 // Get Items that are stored in Local Storage
-var resultId = localStorage.getItem("id");
+let resultId = localStorage.getItem("id");
 //get the timeStamp using date function
 let timeStamp = Date.now();
 
 //stored the public and private key that generated from website
-const privateKey = "a7e0cb303d6f062137427a3620fea77e6ead4638";
-const publicKey = "edc994d7308ca47b1e9fd4f132d4435c";
 
+// const privateKey = "a7e0cb303d6f062137427a3620fea77e6ead4638";
+const privateKey = "048a2cdcf88395e58dcbe388404074b0ca87aa0f";
+// const publicKey = "edc994d7308ca47b1e9fd4f132d4435c";
+const publicKey = "093b914e1174e4bd670d0bdb2b840d42";
 //encrypting the key to generte the hash value using CryptoJS
 let hash = CryptoJS.MD5(timeStamp + privateKey + publicKey).toString();
 
@@ -71,4 +73,28 @@ function displayDetail(response) {
   document.getElementById("offset").innerHTML =
     "<b>Offset: </b>" + response.data.offset;
   document.getElementById("code").innerHTML = "<b>Code: </b>" + response.code;
+}
+const addToFavorite = () => {
+  saveToFavorite(resultId);
+};
+// save fav data to local storage
+function saveToFavorite(result) {
+  let favorite = checkFavorite(result);
+  // checking if the same if is present in the list or not
+  const checkexisting = favorite.filter((el) => {
+    return el.id === result;
+  });
+
+  let tempObj = {};
+  tempObj.id = parseInt(result);
+  if (checkexisting.length === 0) favorite.push(tempObj);
+  localStorage.setItem("favorite", JSON.stringify(favorite));
+}
+// Is fav data saved in Local Storage?
+function checkFavorite() {
+  let favorite = [];
+  const isPresent = localStorage.getItem("favorite");
+  if (isPresent) favorite = JSON.parse(isPresent);
+
+  return favorite;
 }

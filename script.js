@@ -2,9 +2,10 @@
 let timeStamp = Date.now();
 
 //stored the public and private key that generated from website
-const privateKey = "a7e0cb303d6f062137427a3620fea77e6ead4638";
-const publicKey = "edc994d7308ca47b1e9fd4f132d4435c";
-
+// const privateKey = "a7e0cb303d6f062137427a3620fea77e6ead4638";
+const privateKey = "048a2cdcf88395e58dcbe388404074b0ca87aa0f";
+// const publicKey = "edc994d7308ca47b1e9fd4f132d4435c";
+const publicKey = "093b914e1174e4bd670d0bdb2b840d42";
 //encrypting the key to generte the hash value using CryptoJS
 let hash = CryptoJS.MD5(timeStamp + privateKey + publicKey).toString();
 
@@ -12,7 +13,7 @@ let hash = CryptoJS.MD5(timeStamp + privateKey + publicKey).toString();
 const url = "https://gateway.marvel.com:443/v1/public/";
 
 window.addEventListener("DOMContentLoaded", (event) => {
-  setInterval(checkSearchString, 1000);
+  getAllHeros();
 });
 //fetch all the super hero list
 const getAllHeros = () => {
@@ -60,19 +61,47 @@ function display(data) {
         localStorage.setItem("id", result.id);
         window.location.assign("./aboutSuperHero.html");
       });
-    // //  Set Event listenet for Fav  more button
-    // templateCanvas.getElementById("fav").addEventListener("click", function () {
-    //   var index = localStorage.length;
-    //   var data = JSON.stringify(result);
-    //   localStorage.setItem(result.id, data);
-    // });
+    //  Set Event listenet for Fav  more button
+    templateCanvas.getElementById("fav").addEventListener("click", function () {
+      saveToFavorite(result.id);
+    });
     superHeroList.appendChild(templateCanvas);
   }
+}
+// save fav data to local storage
+function saveToFavorite(result) {
+  let favorite = checkFavorite();
+  // checking if the same if is present in the list or not
+  const checkexisting = favorite.filter((el) => {
+    return el.id === result;
+  });
+  let tempObj = {};
+  tempObj.id = result;
+  if (checkexisting.length === 0) favorite.push(tempObj);
+  localStorage.setItem("favorite", JSON.stringify(favorite));
+}
+// Is fav data saved in Local Storage?
+function checkFavorite() {
+  let favorite = [];
+  const isPresent = localStorage.getItem("favorite");
+  if (isPresent) favorite = JSON.parse(isPresent);
+
+  return favorite;
 }
 //perform the search functionality for hero as per input
 const getInput = document.querySelector("#search-string");
 const searchButton = document.querySelector("#search-form");
+
+//this function will handle the user input once the user clear the search event
+getInput.addEventListener("input", (e) => {
+  if (getInput.value.length === 0) {
+    getAllHeros();
+  }
+});
+
+//call the on click button event
 searchButton.addEventListener("click", searchHero);
+//this function will fetch all the marvel character using upi with search string
 function searchHero(e) {
   e.preventDefault();
   let searchValue = getInput.value;
@@ -84,8 +113,3 @@ function searchHero(e) {
       display(data);
     });
 }
-const checkSearchString = () => {
-  if (getInput.value.length === 0) {
-    getAllHeros();
-  }
-};
