@@ -2,19 +2,20 @@
 let timeStamp = Date.now();
 
 //stored the public and private key that generated from website
-// const privateKey = "a7e0cb303d6f062137427a3620fea77e6ead4638";
-const privateKey = "048a2cdcf88395e58dcbe388404074b0ca87aa0f";
-// const publicKey = "edc994d7308ca47b1e9fd4f132d4435c";
-const publicKey = "093b914e1174e4bd670d0bdb2b840d42";
+const privateKey = "a7e0cb303d6f062137427a3620fea77e6ead4638";
+const publicKey = "edc994d7308ca47b1e9fd4f132d4435c";
+
 //encrypting the key to generte the hash value using CryptoJS
 let hash = CryptoJS.MD5(timeStamp + privateKey + publicKey).toString();
 
 //constant url for api
 const url = "https://gateway.marvel.com:443/v1/public/";
 
+//window event listner
 window.addEventListener("DOMContentLoaded", (event) => {
   getAllHeros();
 });
+
 //fetch all the super hero list
 const getAllHeros = () => {
   fetch(`${url}characters?ts=${timeStamp}&apikey=${publicKey}&hash=${hash}`)
@@ -35,6 +36,7 @@ function display(data) {
   // Creating a For Loop because there will be n number of results for same query
   for (let result of results) {
     var templateCanvas = canvas.content.cloneNode(true);
+
     //  Get all the elemets from id and then changes its Inner HTMl
     templateCanvas
       .getElementById("img")
@@ -54,6 +56,7 @@ function display(data) {
       "<b>Stories Available: </b>" + result.stories.available;
     templateCanvas.getElementById("events").innerHTML =
       "<b>Events Available: </b>" + result.events.available;
+
     //  Set Event listenet for Learn  more button
     templateCanvas
       .getElementById("learn-more")
@@ -61,6 +64,7 @@ function display(data) {
         localStorage.setItem("id", result.id);
         window.location.assign("./aboutSuperHero.html");
       });
+
     //  Set Event listenet for Fav  more button
     templateCanvas.getElementById("fav").addEventListener("click", function () {
       saveToFavorite(result.id);
@@ -68,7 +72,8 @@ function display(data) {
     superHeroList.appendChild(templateCanvas);
   }
 }
-// save fav data to local storage
+
+// save fav hero id to local storage
 function saveToFavorite(result) {
   let favorite = checkFavorite();
   // checking if the same if is present in the list or not
@@ -80,14 +85,15 @@ function saveToFavorite(result) {
   if (checkexisting.length === 0) favorite.push(tempObj);
   localStorage.setItem("favorite", JSON.stringify(favorite));
 }
-// Is fav data saved in Local Storage?
+
+// Is fav data saved in Local Storage then get all of them from local storage
 function checkFavorite() {
   let favorite = [];
   const isPresent = localStorage.getItem("favorite");
   if (isPresent) favorite = JSON.parse(isPresent);
-
   return favorite;
 }
+
 //perform the search functionality for hero as per input
 const getInput = document.querySelector("#search-string");
 const searchButton = document.querySelector("#search-form");
@@ -101,6 +107,7 @@ getInput.addEventListener("input", (e) => {
 
 //call the on click button event
 searchButton.addEventListener("click", searchHero);
+
 //this function will fetch all the marvel character using upi with search string
 function searchHero(e) {
   e.preventDefault();

@@ -2,11 +2,10 @@
 let timeStamp = Date.now();
 
 //stored the public and private key that generated from website
+const privateKey = "a7e0cb303d6f062137427a3620fea77e6ead4638";
 
-// const privateKey = "a7e0cb303d6f062137427a3620fea77e6ead4638";
-const privateKey = "048a2cdcf88395e58dcbe388404074b0ca87aa0f";
-// const publicKey = "edc994d7308ca47b1e9fd4f132d4435c";
-const publicKey = "093b914e1174e4bd670d0bdb2b840d42";
+const publicKey = "edc994d7308ca47b1e9fd4f132d4435c";
+
 //encrypting the key to generte the hash value using CryptoJS
 let hash = CryptoJS.MD5(timeStamp + privateKey + publicKey).toString();
 
@@ -30,7 +29,7 @@ const getAllFavoriteHeros = () => {
         });
     });
   } else {
-    noData.innerText = "Hero not added as Favorite";
+    noData.innerText = "No Hero added as Favorite";
   }
 };
 //  Get Canvas
@@ -38,7 +37,6 @@ var canvas = document.getElementById("canvas");
 
 // This Function will display the Data on the Screen
 function displayDetail(data) {
-  console.log("hiiiiiiiii");
   let result = data.data.results[0];
 
   var templateCanvas = canvas.content.cloneNode(true);
@@ -81,7 +79,6 @@ function removeFromFavorite(id) {
   let favorite = checkFavorite();
   // checking if the same if is present in the list or not
   const checkexisting = favorite.filter((item) => id !== item.id);
-  console.log("checking err", checkexisting);
   localStorage.removeItem("favorite");
   localStorage.setItem("favorite", JSON.stringify(checkexisting));
   window.location.assign("./favoriteHero.html");

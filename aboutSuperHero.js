@@ -1,23 +1,25 @@
-// Get Items that are stored in Local Storage
+// Get id of hero from Local Storage for more info
 let resultId = localStorage.getItem("id");
+
 //get the timeStamp using date function
 let timeStamp = Date.now();
 
 //stored the public and private key that generated from website
+const privateKey = "a7e0cb303d6f062137427a3620fea77e6ead4638";
+const publicKey = "edc994d7308ca47b1e9fd4f132d4435c";
 
-// const privateKey = "a7e0cb303d6f062137427a3620fea77e6ead4638";
-const privateKey = "048a2cdcf88395e58dcbe388404074b0ca87aa0f";
-// const publicKey = "edc994d7308ca47b1e9fd4f132d4435c";
-const publicKey = "093b914e1174e4bd670d0bdb2b840d42";
 //encrypting the key to generte the hash value using CryptoJS
 let hash = CryptoJS.MD5(timeStamp + privateKey + publicKey).toString();
 
 //constant url for api
 const url = "https://gateway.marvel.com:443/v1/public/";
 
+//window event listner
 window.addEventListener("DOMContentLoaded", (event) => {
   aboutHero();
 });
+
+//fetch the information about the hero
 const aboutHero = () => {
   fetch(
     `${url}characters/${resultId}?ts=${timeStamp}&apikey=${publicKey}&hash=${hash}`
@@ -27,6 +29,8 @@ const aboutHero = () => {
       displayDetail(data);
     });
 };
+
+// This Function will display the Data on the Screen
 function displayDetail(response) {
   // According to all Id's i will get elemets and change its inner HTML by the Responses
   document
@@ -74,10 +78,12 @@ function displayDetail(response) {
     "<b>Offset: </b>" + response.data.offset;
   document.getElementById("code").innerHTML = "<b>Code: </b>" + response.code;
 }
+//function for add the hero in fav list
 const addToFavorite = () => {
   saveToFavorite(resultId);
 };
-// save fav data to local storage
+
+// save fav hero id to local storage
 function saveToFavorite(result) {
   let favorite = checkFavorite(result);
   // checking if the same if is present in the list or not
@@ -90,7 +96,8 @@ function saveToFavorite(result) {
   if (checkexisting.length === 0) favorite.push(tempObj);
   localStorage.setItem("favorite", JSON.stringify(favorite));
 }
-// Is fav data saved in Local Storage?
+
+// Is fav data saved in Local Storage then get all of them from local storage
 function checkFavorite() {
   let favorite = [];
   const isPresent = localStorage.getItem("favorite");

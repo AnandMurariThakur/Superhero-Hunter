@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Added this to get the nav-bar on the top of the screen -->
     <nav class="navbar sticky-top" style="background-color: lightblue">
       <div class="container-fluid">
         <a class="navbar-brand">SuperHero Hunter</a>
@@ -60,9 +61,11 @@
         </div>
       </div>
     </section>
-    <button class="bottom-left-button">
-      <a class="back-button" href="./index.html">Back</a>
+    <!-- added button to navigate to previous page-->
+    <button class="bottom-left-button" onclick="window.history.back()">
+      <a class="back-button">Back</a>
     </button>
+    <!-- added button  to add hero to fav list -->
     <button class="bottom-right-button" onclick="addToFavorite()">
       Add to favorite superheroes
     </button>

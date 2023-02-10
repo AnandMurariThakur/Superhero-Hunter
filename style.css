@@ -1,3 +1,4 @@
+/* this will set the bottom on the bottom right corner */
 .bottom-right-button {
   position: absolute;
   bottom: 10px;
@@ -9,12 +10,13 @@
   padding: 10px 20px;
   cursor: pointer;
 }
+/* used this so that window screen i9s fixed and content can  scrolled within window size */
 .result-section {
   overflow: scroll;
   height: 90vh;
   padding-top: 20px;
 }
-
+/* to hide the scroll bar */
 .result-section::-webkit-scrollbar {
   display: none;
 }
@@ -26,6 +28,7 @@
 .about-sec::-webkit-scrollbar {
   display: none;
 }
+/* this will set the bottom on the bottom left corner */
 .bottom-left-button {
   position: absolute;
   bottom: 10px;
@@ -36,6 +39,7 @@
   padding: 10px 20px;
   cursor: pointer;
 }
+/* removed the link style */
 .back-button {
   color: black;
   text-decoration: none;
