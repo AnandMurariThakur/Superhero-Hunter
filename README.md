@@ -1,5 +1,9 @@
 # Superhero-Hunter
 
+WE HAVE USED HTML, CSS AND JAVASCRIPT IN THIS REPOSITORY AND INDEX.HTML IN OUR ENTRY PAGE
+
+#
+
 #Steps
 
 -First register yourself on "https://developer.marvel.com/docs" and get the private and public key for your self.
