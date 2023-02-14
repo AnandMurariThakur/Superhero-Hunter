@@ -64,13 +64,6 @@ function display(data) {
         localStorage.setItem("id", result.id);
         window.location.assign("./aboutSuperHero.html");
       });
-    //navigating to about hero page on click of card
-    templateCanvas
-      .getElementById("col-3")
-      .addEventListener("click", function () {
-        localStorage.setItem("id", result.id);
-        window.location.assign("./aboutSuperHero.html");
-      });
     //  Set Event listenet for Fav  more button
     templateCanvas.getElementById("fav").addEventListener("click", function () {
       saveToFavorite(result.id);
