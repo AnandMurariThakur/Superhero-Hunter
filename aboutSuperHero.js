@@ -43,15 +43,7 @@ function displayDetail(response) {
         response.data.results[0].thumbnail.extension
       }`
     );
-  document
-    .getElementById("details")
-    .setAttribute("href", `${response.data.results[0].urls[0].url}`);
-  document
-    .getElementById("wiki")
-    .setAttribute("href", `${response.data.results[0].urls[1].url}`);
-  document
-    .getElementById("comiclink")
-    .setAttribute("href", `${response.data.results[0].urls[2].url}`);
+
   document.getElementById("name").innerHTML =
     "<b>Name: </b> " + response.data.results[0].name;
   document.getElementById("id").innerHTML =
@@ -77,6 +69,9 @@ function displayDetail(response) {
   document.getElementById("offset").innerHTML =
     "<b>Offset: </b>" + response.data.offset;
   document.getElementById("code").innerHTML = "<b>Code: </b>" + response.code;
+  for (let url of response.data.results[0].urls) {
+    document.getElementById(`${url.type}`).setAttribute("href", `${url.url}`);
+  }
 }
 //function for add the hero in fav list
 const addToFavorite = () => {
